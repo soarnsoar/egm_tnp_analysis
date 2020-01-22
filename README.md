@@ -182,6 +182,9 @@ The nvtx and rho histos are not needed because we will use the pu method (type =
 NB: Before using these py in order to load the needed libraires one has to run: 
 export  PYTHONPATH=$PYTHONPATH:/afs/cern.ch/user/s/soffi/scratch0/TEST/CMSSW-10-0-0-pre3/src/egm_tnp_analysis 
 
+LATEST for UL:
+pileupCalc.py -i ~/public/4Shilpi/Cert_271036-284044_13TeV_PromptReco_Collisions16_JSON_runBF.txt --inputLumiJSON /afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions16/13TeV/PileUp/pileup_latest.txt --calcMode true --minBiasXsec 69200 --maxPileupBin 100 --numPileupBins 100 pileup_runBF.root
+
 
 #### adding remote (Fabrice version)
 git remote add origin git@github.com:fcouderc/egm_tnp_analysis.git
