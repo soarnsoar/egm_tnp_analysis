@@ -8,6 +8,15 @@ flags = {
     'passingMedium94X'  : '(passingMedium94X == 1)',
     'passingTight94X'   : '(passingTight94X  == 1)',
     'passingOOTTight94X'   : '(passingOOTTight94X  == 1)',
+    'passingOOTTightOnlyIsos94X'   : '(passingOOTTightOnlyIsos94X  == 1)',
+    'passingOOTTightNoSmaj94X'   : '(passingOOTTightNoSmaj94X  == 1)',
+    'passingOOTTightOnlySmaj94X'   : '(passingOOTTightOnlySmaj94X  == 1)',
+    'passingHPTTight94X'   : '(passingHPTTight94X  == 1)',
+    'passingOOTTightAbsSmaj94X'   : '    (passingOOTTightAbsSmaj94X == 1)',
+    'passingOOTTightAbsSmajSminVLSieie94X'   : '    (passingOOTTightAbsSmajSminVLSieie94X == 1)',
+    'passingGEDTightAbsSmaj94X'   : '    (passingGEDTightAbsSmaj94X == 1)',
+    'passingGEDTightAbsSmajSmin94X'   : '    (passingGEDTightAbsSmajSmin94X == 1)',
+    'passingGEDTightAbsSmajSminVLSieie94X'   : '    (passingGEDTightAbsSmajSminVLSieie94X == 1)',
     }
 
 baseOutDir = 'results/Moriond18_OOTid/tnpPhoID/runBCDEF/'
@@ -60,9 +69,9 @@ weightName = 'weights_2017_runBCDEF.totWeight'
 if not samplesDef['mcNom' ] is None: samplesDef['mcNom' ].set_weight(weightName)
 if not samplesDef['mcAlt' ] is None: samplesDef['mcAlt' ].set_weight(weightName)
 if not samplesDef['tagSel'] is None: samplesDef['tagSel'].set_weight(weightName)
-if not samplesDef['mcNom' ] is None: samplesDef['mcNom' ].set_puTree('/eos/cms/store/group/phys_egamma/soffi/TnP/ntuples_07042018_wOOTid/2017Data_FullJson/PU/DY_madgraph_Moriond18_pho.pu.puTree.root')
-if not samplesDef['mcAlt' ] is None: samplesDef['mcAlt' ].set_puTree('/eos/cms/store/group/phys_egamma/soffi/TnP/ntuples_07042018_wOOTid/2017Data_FullJson/PU/DY_madgraph_Moriond18_pho.pu.puTree.root')
-if not samplesDef['tagSel'] is None: samplesDef['tagSel'].set_puTree('/eos/cms/store/group/phys_egamma/soffi/TnP/ntuples_07042018_wOOTid/2017Data_FullJson/PU/DY_madgraph_Moriond18_pho.pu.puTree.root')
+if not samplesDef['mcNom' ] is None: samplesDef['mcNom' ].set_puTree('/eos/cms/store/group/phys_egamma/soffi/TnP/ntuples_04012019-OOTID/2017Data_FullJson/mc/PU/DY_madgraph_Moriond18_pho.pu.puTree.root')
+if not samplesDef['mcAlt' ] is None: samplesDef['mcAlt' ].set_puTree('/eos/cms/store/group/phys_egamma/soffi/TnP/ntuples_04012019-OOTID/2017Data_FullJson/mc/PU/DY_madgraph_Moriond18_pho.pu.puTree.root')
+if not samplesDef['tagSel'] is None: samplesDef['tagSel'].set_puTree('/eos/cms/store/group/phys_egamma/soffi/TnP/ntuples_04012019-OOTID/2017Data_FullJson/mc/PU/DY_madgraph_Moriond18_pho.pu.puTree.root')
 
 
 
@@ -70,8 +79,11 @@ if not samplesDef['tagSel'] is None: samplesDef['tagSel'].set_puTree('/eos/cms/s
 ########## bining definition  [can be nD bining]
 #############################################################
 biningDef = [
+#    { 'var' : 'ph_sc_eta' , 'type': 'float', 'bins': [-2.5, -1.4442,  0.0,  1.4442,  2.5] },      
+
    { 'var' : 'ph_sc_eta' , 'type': 'float', 'bins': [-1.4442, -0.8, 0.0, 0.8, 1.4442] },
-   { 'var' : 'ph_et' , 'type': 'float', 'bins': [20,35,50,100,200,500] },
+   { 'var' : 'ph_et' , 'type': 'float', 'bins': [70,90,110,150,200,300, 1000] },    
+#   { 'var' : 'ph_et' , 'type': 'float', 'bins': [20,35,50,100,200,500] },
 ]
 
 #############################################################

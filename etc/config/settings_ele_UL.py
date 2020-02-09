@@ -1,4 +1,3 @@
-
 #############################################################
 ########## General settings
 #############################################################
@@ -8,41 +7,41 @@ cutpass90 = '(( abs(probe_sc_eta) < 0.8 && probe_Ele_nonTrigMVA > %f ) ||  ( abs
 
 # flag to be Tested
 flags = {
-     'passingVeto94XV2'    : '(passingVeto94XV2   == 1)',
-     'passingLoose94XV2'   : '(passingLoose94XV2  == 1)',
-     'passingMedium94XV2'  : '(passingMedium94XV2 == 1)',
-     'passingTight94XV2'   : '(passingTight94XV2  == 1)',
-     'passingMVA94Xwp80isoV2' : '(passingMVA94Xwp80isoV2 == 1)',
-     'passingMVA94Xwp90isoV2' : '(passingMVA94Xwp90isoV2 == 1)',
-     'passingMVA94Xwp80noisoV2' : '(passingMVA94Xwp80noisoV2 == 1)',
-     'passingMVA94Xwp90noisoV2' : '(passingMVA94Xwp90noisoV2 == 1)',
-     'passingMVA94XwpLisoV2'    : '(passingMVA94XwpLisoV2 == 1)',
-     'passingMVA94XwpLnoisoV2'  : '(passingMVA94XwpLnoisoV2 == 1)',
-     'passingMVA94XwpHZZisoV2'  : '(passingMVA94XwpHZZisoV2 == 1)',
+    'passingVeto94XV2'    : '(passingVeto94XV2   == 1)',
+    'passingLoose94XV2'   : '(passingLoose94XV2  == 1)',
+    'passingMedium94XV2'  : '(passingMedium94XV2 == 1)',
+    'passingTight94XV2'   : '(passingTight94XV2  == 1)',
+    'passingMVA94Xwp80isoV2' : '(passingMVA94Xwp80isoV2 == 1)',
+    'passingMVA94Xwp90isoV2' : '(passingMVA94Xwp90isoV2 == 1)',
+    'passingMVA94Xwp80noisoV2' : '(passingMVA94Xwp80noisoV2 == 1)',
+    'passingMVA94Xwp90noisoV2' : '(passingMVA94Xwp90noisoV2 == 1)',
+    'passingMVA94XwpLisoV2'    : '(passingMVA94XwpLisoV2 == 1)',
+    'passingMVA94XwpLnoisoV2'  : '(passingMVA94XwpLnoisoV2 == 1)',
+    'passingMVA94XwpHZZisoV2'  : '(passingMVA94XwpHZZisoV2 == 1)',
+    }
 
-}
-baseOutDir = 'results/UL2017/tnpEleID/runCF/'
+baseOutDir = 'results/UL2017_hs/tnpEleID/runBCDEF/'
 
 #############################################################
 ########## samples definition  - preparing the samples
 #############################################################
 ### samples are defined in etc/inputs/tnpSampleDef.py
 ### not: you can setup another sampleDef File in inputs
-import etc.inputs.tnpSampleDef as tnpSamples
+import etc.inputs.tnpSampleDef_UL as tnpSamples
 tnpTreeDir = 'tnpEleIDs'
 
 samplesDef = {
-    'data'   : tnpSamples.UL2017['data_Run2017C'].clone(),
-    'mcNom'  : tnpSamples.UL2017['DY_madgraph'].clone(),
-    'mcAlt'  : tnpSamples.UL2017['DY_amcatnlo_2017UL'].clone(),
-    'tagSel' : tnpSamples.UL2017['DY_madgraph'].clone(),
+    'data'   : tnpSamples.Moriond18_94X['data_Run2017B'].clone(),
+    'mcNom'  : tnpSamples.Moriond18_94X['DY_1j_madgraph'].clone(),
+    'mcAlt'  : tnpSamples.Moriond18_94X['DY_amcatnloext'].clone(),
+    'tagSel' : tnpSamples.Moriond18_94X['DY_1j_madgraph'].clone(),
 }
 
 ## can add data sample easily
-#samplesDef['data'].add_sample( tnpSamples.UL2017['data_Run2017C'] )
-#samplesDef['data'].add_sample( tnpSamples.UL2017['data_Run2017D'] )
-#samplesDef['data'].add_sample( tnpSamples.UL2017['data_Run2017E'] )
-samplesDef['data'].add_sample( tnpSamples.UL2017['data_Run2017F'] )
+samplesDef['data'].add_sample( tnpSamples.Moriond18_94X['data_Run2017C'] )
+samplesDef['data'].add_sample( tnpSamples.Moriond18_94X['data_Run2017D'] )
+samplesDef['data'].add_sample( tnpSamples.Moriond18_94X['data_Run2017E'] )
+samplesDef['data'].add_sample( tnpSamples.Moriond18_94X['data_Run2017F'] )
 
 ## some sample-based cuts... general cuts defined here after
 ## require mcTruth on MC DY samples and additional cuts
@@ -72,9 +71,9 @@ weightName = 'weights_2017_runBCDEF.totWeight'
 if not samplesDef['mcNom' ] is None: samplesDef['mcNom' ].set_weight(weightName)
 if not samplesDef['mcAlt' ] is None: samplesDef['mcAlt' ].set_weight(weightName)
 if not samplesDef['tagSel'] is None: samplesDef['tagSel'].set_weight(weightName)
-if not samplesDef['mcNom' ] is None: samplesDef['mcNom' ].set_puTree('/eos/cms/store/group/phys_egamma/swmukher/UL/ntuple_2017_UltraLegacy/PU_redo/DY_1j_madgraph_ele.pu.puTree.root')
-if not samplesDef['mcAlt' ] is None: samplesDef['mcAlt' ].set_puTree('/eos/cms/store/group/phys_egamma/swmukher/UL/ntuple_2017_UltraLegacy/PU_redo/DY_1j_madgraph_ele.pu.puTree.root')
-if not samplesDef['tagSel'] is None: samplesDef['tagSel'].set_puTree('/eos/cms/store/group/phys_egamma/swmukher/UL/ntuple_2017_UltraLegacy/PU_redo/DY_1j_madgraph_ele.pu.puTree.root')
+if not samplesDef['mcNom' ] is None: samplesDef['mcNom' ].set_puTree('/eos/cms/store/group/phys_egamma/swmukher/UL2017/PU_fs/DY_1j_madgraph_ele.pu.puTree.root')
+if not samplesDef['mcAlt' ] is None: samplesDef['mcAlt' ].set_puTree('/eos/cms/store/group/phys_egamma/swmukher/UL2017/PU_fs/DY_amcatnloext_ele.pu.puTree.root')
+if not samplesDef['tagSel'] is None: samplesDef['tagSel'].set_puTree('/eos/cms/store/group/phys_egamma/swmukher/UL2017/PU_fs/DY_1j_madgraph_ele.pu.puTree.root')
 
 
 #############################################################
@@ -82,6 +81,7 @@ if not samplesDef['tagSel'] is None: samplesDef['tagSel'].set_puTree('/eos/cms/s
 #############################################################
 biningDef = [
    { 'var' : 'el_sc_eta' , 'type': 'float', 'bins': [-2.5,-2.0,-1.566,-1.4442, -0.8, 0.0, 0.8, 1.4442, 1.566, 2.0, 2.5] },
+#   { 'var' : 'el_pt' , 'type': 'float', 'bins': [10,20,35,50,100,500] },
    { 'var' : 'el_pt' , 'type': 'float', 'bins': [10,20,35,50,100,200,500] },
 
 
@@ -91,7 +91,7 @@ biningDef = [
 ########## Cuts definition for all samples
 #############################################################
 ### cut
-cutBase   = 'tag_Ele_pt > 30 && abs(tag_sc_eta) < 2.17 && el_q*tag_Ele_q < 0'
+cutBase   = 'tag_Ele_pt > 35 && abs(tag_sc_eta) < 2.17 && el_q*tag_Ele_q < 0'
 
 # can add addtionnal cuts for some bins (first check bin number using tnpEGM --checkBins)
 additionalCuts = { 

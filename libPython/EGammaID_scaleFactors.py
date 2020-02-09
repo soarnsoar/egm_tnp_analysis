@@ -177,7 +177,8 @@ def EffiGraph1D(effDataList, effMCList, sfList ,nameout, xAxis = 'pT', yAxis = '
             
         grBinsEffData.GetHistogram().GetYaxis().SetTitleOffset(1)
         grBinsEffData.GetHistogram().GetYaxis().SetTitle("Data efficiency" )
-        grBinsEffData.GetHistogram().GetYaxis().SetRangeUser( effiMin, effiMax )
+#        grBinsEffData.GetHistogram().GetYaxis().SetRangeUser( effiMin, effiMax )
+        grBinsEffData.GetHistogram().GetYaxis().SetRangeUser( 0.15,1.35)
 
             
         ### to avoid loosing the TGraph keep it in memory by adding it to a list
@@ -206,10 +207,12 @@ def EffiGraph1D(effDataList, effMCList, sfList ,nameout, xAxis = 'pT', yAxis = '
         listOfTGraph1[use_igr].SetMarkerColor(graphColors[use_igr])
         if not listOfMC[use_igr] is None:
             listOfMC[use_igr].SetLineColor(graphColors[use_igr])
-
-        listOfTGraph1[use_igr].GetHistogram().SetMinimum(effiMin)
-        listOfTGraph1[use_igr].GetHistogram().SetMaximum(effiMax)
+            #        listOfTGraph1[use_igr].GetHistogram().SetMinimum(effiMin)
+        listOfTGraph1[use_igr].GetHistogram().SetMinimum(0.15)
+#        listOfTGraph1[use_igr].GetHistogram().SetMaximum(effiMax)
+        listOfTGraph1[use_igr].GetHistogram().SetMaximum(1.35)
         p1.cd()
+        
         listOfTGraph1[use_igr].Draw(option)
         if not listOfMC[use_igr] is None:
             listOfMC[use_igr].Draw("ez")
@@ -237,7 +240,7 @@ def EffiGraph1D(effDataList, effMCList, sfList ,nameout, xAxis = 'pT', yAxis = '
     p1.Draw()
 
     leg.Draw()    
-    CMS_lumi.CMS_lumi(c, 4, 10)
+    CMS_lumi.CMS_lumi(c,4,10)
 
     c.Print(nameout)
     listName = nameout.split('/')
@@ -321,7 +324,7 @@ def doEGM_SFs(filein, lumi, axis = ['pT','eta'] ):
     customEtaBining = []
     customEtaBining.append( (0.000,0.800))
     customEtaBining.append( (0.800,1.444))
-    customEtaBining.append( (1.444,1.566))
+#    customEtaBining.append( (1.444,1.566))
     customEtaBining.append( (1.566,2.000))
     customEtaBining.append( (2.000,2.500))
 
@@ -331,14 +334,19 @@ def doEGM_SFs(filein, lumi, axis = ['pT','eta'] ):
     cDummy.Print( pdfout + "[" )
 
 
-    EffiGraph1D( effGraph.pt_1DGraph_list( False ) , #eff Data
-                 None, 
-                 effGraph.pt_1DGraph_list( True ) , #SF
+ #   EffiGraph1D( effGraph.pt_1DGraph_list( False ) , #eff Data
+ #                None, 
+ #                effGraph.pt_1DGraph_list( True ) , #SF
+ #                pdfout,
+ #                xAxis = axis[0], yAxis = axis[1] )
+    EffiGraph1D( effGraph.pt_1DGraph_list_customEtaBining(customEtaBining,False) , 
+                 None,
+                 effGraph.pt_1DGraph_list_customEtaBining(customEtaBining,True)   , 
                  pdfout,
                  xAxis = axis[0], yAxis = axis[1] )
-#EffiGraph1D( effGraph.pt_1DGraph_list_customEtaBining(customEtaBining,False) , 
-#             effGraph.pt_1DGraph_list_customEtaBining(customEtaBining,True)   , False, pdfout )
 #    EffiGraph1D( effGraph.eta_1DGraph_list(False), effGraph.eta_1DGraph_list(True), True , pdfout )
+
+
     listOfSF1D = EffiGraph1D( effGraph.eta_1DGraph_list( typeGR =  0 ) , # eff Data
                               effGraph.eta_1DGraph_list( typeGR = -1 ) , # eff MC
                               effGraph.eta_1DGraph_list( typeGR = +1 ) , # SF
