@@ -5,7 +5,7 @@
 
 flags = {
     'passing_mvaFall17Iso_WP90'    : '(passingCutBasedMedium94X   == 1) && (passingMVA94Xwp90iso == 1 ) &&\
-    (   (el_sc_abseta <= 1.479) ? (el_dxy < 0.05 && el_dz <0.1) : (el_dxy < 0.1 && el_dz <0.2 && el_sieie < 0.03 && el_IoEmIop < 0.014 ))',
+    (   (el_sc_abseta <= 1.479)*(el_dxy < 0.05 && el_dz <0.1) + (el_sc_abseta > 1.479)*(el_dxy < 0.1 && el_dz <0.2 && el_sieie < 0.03 && el_IoEmIop < 0.014 ))',
     }##FIXME :: add conveto
 
 baseOutDir = 'results/Data2017/tnpEleID/'
