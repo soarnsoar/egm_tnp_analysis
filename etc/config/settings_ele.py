@@ -2,22 +2,13 @@
 ########## General settings
 #############################################################
 # flag to be Tested
-cutpass80 = '(( abs(probe_sc_eta) < 0.8 && probe_Ele_nonTrigMVA > %f ) ||  ( abs(probe_sc_eta) > 0.8 && abs(probe_sc_eta) < 1.479&& probe_Ele_nonTrigMVA > %f ) || ( abs(probe_sc_eta) > 1.479 && probe_Ele_nonTrigMVA > %f ) )' % (0.967083,0.929117,0.726311)
-cutpass90 = '(( abs(probe_sc_eta) < 0.8 && probe_Ele_nonTrigMVA > %f ) ||  ( abs(probe_sc_eta) > 0.8 && abs(probe_sc_eta) < 1.479&& probe_Ele_nonTrigMVA > %f ) || ( abs(probe_sc_eta) > 1.479 && probe_Ele_nonTrigMVA > %f ) )' % (0.913286,0.805013,0.358969)
 
-# flag to be Tested
 flags = {
-    'passingVeto94X'    : '(passingVeto94X   == 1)',
-    'passingLoose94X'   : '(passingLoose94X  == 1)',
-    'passingMedium94X'  : '(passingMedium94X == 1)',
-    'passingTight94X'   : '(passingTight94X  == 1)',
-    'passingMVA94Xwp80iso' : '(passingMVA94Xwp80iso == 1)',
-    'passingMVA94Xwp90iso' : '(passingMVA94Xwp90iso == 1)',
-    'passingMVA94Xwp80noiso' : '(passingMVA94Xwp80noiso == 1)',
-    'passingMVA94Xwp90noiso' : '(passingMVA94Xwp90noiso == 1)',
-    }
+    'passing_mvaFall17Iso_WP90'    : '(passingCutBasedMedium94X   == 1) && (passingMVA94Xwp90iso == 1 ) && (!el_hasMatchedConversion) &&\
+    (   (el_sc_abseta <= 1.479) ? (el_dxy < 0.05 && el_dz <0.1) : (el_dxy < 0.1 && el_dz <0.2 && el_sieie < 0.03 && el_IoEmIop < 0.014 ))',
+    }##FIXME :: add conveto
 
-baseOutDir = 'results/Data2018/tnpEleID/runA/'
+baseOutDir = 'results/Data2017/tnpEleID/'
 
 #############################################################
 ########## samples definition  - preparing the samples
@@ -26,59 +17,30 @@ baseOutDir = 'results/Data2018/tnpEleID/runA/'
 ### not: you can setup another sampleDef File in inputs
 import etc.inputs.tnpSampleDef as tnpSamples
 tnpTreeDir = 'tnpEleIDs'
-
-samplesDef = {
-    'data'   : tnpSamples.Data2018_10_1_X['data_2018_RunA_v123'].clone(),
-    'mcNom'  : tnpSamples.Data2018_10_1_X['DY_madgraph_2018_30p'].clone(),
-    'mcAlt'  : tnpSamples.Data2018_10_1_X['DY_madgraph_2018_30p'].clone(),
-    'tagSel' : tnpSamples.Data2018_10_1_X['DY_madgraph_2018_30p'].clone(),
+samplesDef={
+    'data'   : tnpSamples.dict2017['data_Run2017B'].clone(),
+    'mcNom'  : tnpSamples.dict2017['DY_madgraph'].clone(),
+    'mcAlt'  : tnpSamples.dict2017['DY_amcatnlo'].clone(),
+    'tagSel' : tnpSamples.dict2017['DY_madgraph'].clone(),
+    'tagSel2' : tnpSamples.dict2017['DY_madgraph'].clone(),
 }
-
-## can add data sample easily
-#samplesDef['data'].add_sample( tnpSamples.Moriond18_94X['data_Run2017C'] )
-#samplesDef['data'].add_sample( tnpSamples.Moriond18_94X['data_Run2017D'] )
-#samplesDef['data'].add_sample( tnpSamples.Moriond18_94X['data_Run2017E'] )
-#samplesDef['data'].add_sample( tnpSamples.Moriond18_94X['data_Run2017F'] )
-
-## some sample-based cuts... general cuts defined here after
-## require mcTruth on MC DY samples and additional cuts
-## all the samples MUST have different names (i.e. sample.name must be different for all)
-## if you need to use 2 times the same sample, then rename the second one
-#samplesDef['data'  ].set_cut('run >= 273726')
-samplesDef['data' ].set_tnpTree(tnpTreeDir)
-if not samplesDef['mcNom' ] is None: samplesDef['mcNom' ].set_tnpTree(tnpTreeDir)
-if not samplesDef['mcAlt' ] is None: samplesDef['mcAlt' ].set_tnpTree(tnpTreeDir)
-if not samplesDef['tagSel'] is None: samplesDef['tagSel'].set_tnpTree(tnpTreeDir)
 
 if not samplesDef['mcNom' ] is None: samplesDef['mcNom' ].set_mcTruth()
 if not samplesDef['mcAlt' ] is None: samplesDef['mcAlt' ].set_mcTruth()
 if not samplesDef['tagSel'] is None: samplesDef['tagSel'].set_mcTruth()
 if not samplesDef['tagSel'] is None:
     samplesDef['tagSel'].rename('mcAltSel_DY_madgraph')
-    samplesDef['tagSel'].set_cut('tag_Ele_pt > 37') #canceled non trig MVA cut
-
-## set MC weight, simple way (use tree weight) 
-#weightName = 'totWeight'
-#if not samplesDef['mcNom' ] is None: samplesDef['mcNom' ].set_weight(weightName)
-#if not samplesDef['mcAlt' ] is None: samplesDef['mcAlt' ].set_weight(weightName)
-#if not samplesDef['tagSel'] is None: samplesDef['tagSel'].set_weight(weightName)
-
-## set MC weight, can use several pileup rw for different data taking periods
-weightName = 'weights_2018_runAB.totWeight'
-if not samplesDef['mcNom' ] is None: samplesDef['mcNom' ].set_weight(weightName)
-if not samplesDef['mcAlt' ] is None: samplesDef['mcAlt' ].set_weight(weightName)
-if not samplesDef['tagSel'] is None: samplesDef['tagSel'].set_weight(weightName)
-if not samplesDef['mcNom' ] is None: samplesDef['mcNom' ].set_puTree('/eos/cms/store/group/phys_egamma/soffi/TnP/ntuples_06152018/2018Data_1/PU/DY_madgraph_2018_30p_ele.pu.puTree.root')
-if not samplesDef['mcAlt' ] is None: samplesDef['mcAlt' ].set_puTree('/eos/cms/store/group/phys_egamma/soffi/TnP/ntuples_06152018/2018Data_1/PU/DY_madgraph_2018_30p_ele.pu.puTree.root')
-if not samplesDef['tagSel'] is None: samplesDef['tagSel'].set_puTree('/eos/cms/store/group/phys_egamma/soffi/TnP/ntuples_06152018/2018Data_1/PU/DY_madgraph_2018_30p_ele.pu.puTree.root')
-
+    samplesDef['tagSel'].set_cut('tag_Ele_pt > 35') #
+if not samplesDef['tagSel2'] is None:
+    samplesDef['tagSel2'].rename('mcAltSel2_DY_madgraph')
+    samplesDef['tagSel2'].set_cut('tag_Ele_pt > 45') #
 
 #############################################################
 ########## bining definition  [can be nD bining]
 #############################################################
 biningDef = [
-   { 'var' : 'el_sc_eta' , 'type': 'float', 'bins': [-2.5,-2.0,-1.566,-1.4442, -0.8, 0.0, 0.8, 1.4442, 1.566, 2.0, 2.5] },
-   { 'var' : 'el_pt' , 'type': 'float', 'bins': [10,20,35,50,100,200,500] },
+    { 'var' : 'el_sc_eta' , 'type': 'float', 'bins': [-2.5, -2.1, -1.570, -1.440, -0.800, 0., 0.800, 1.440, 1.570, 2.100, 2.500]},
+    { 'var' : 'el_pt' , 'type': 'float', 'bins': [0., 30., 35., 36.,37.,38.,40.,42.,45.,50.,65.,70.,80.,100.,200.] },
 
 
 ]
@@ -87,22 +49,19 @@ biningDef = [
 ########## Cuts definition for all samples
 #############################################################
 ### cut
-cutBase   = 'tag_Ele_pt > 30 && abs(tag_sc_eta) < 2.17 && el_q*tag_Ele_q < 0'
+cutBase   = 'tag_Ele_pt > 40 && abs(tag_sc_eta) < 2.17 '
 
 # can add addtionnal cuts for some bins (first check bin number using tnpEGM --checkBins)
-additionalCuts = { 
-    0 : 'tag_Ele_trigMVA > 0.92 && sqrt( 2*event_met_pfmet*tag_Ele_pt*(1-cos(event_met_pfphi-tag_Ele_phi))) < 45',
-    1 : 'tag_Ele_trigMVA > 0.92 && sqrt( 2*event_met_pfmet*tag_Ele_pt*(1-cos(event_met_pfphi-tag_Ele_phi))) < 45',
-    2 : 'tag_Ele_trigMVA > 0.92 && sqrt( 2*event_met_pfmet*tag_Ele_pt*(1-cos(event_met_pfphi-tag_Ele_phi))) < 45',
-    3 : 'tag_Ele_trigMVA > 0.92 && sqrt( 2*event_met_pfmet*tag_Ele_pt*(1-cos(event_met_pfphi-tag_Ele_phi))) < 45',
-    4 : 'tag_Ele_trigMVA > 0.92 && sqrt( 2*event_met_pfmet*tag_Ele_pt*(1-cos(event_met_pfphi-tag_Ele_phi))) < 45',
-    5 : 'tag_Ele_trigMVA > 0.92 && sqrt( 2*event_met_pfmet*tag_Ele_pt*(1-cos(event_met_pfphi-tag_Ele_phi))) < 45',
-    6 : 'tag_Ele_trigMVA > 0.92 && sqrt( 2*event_met_pfmet*tag_Ele_pt*(1-cos(event_met_pfphi-tag_Ele_phi))) < 45',
-    7 : 'tag_Ele_trigMVA > 0.92 && sqrt( 2*event_met_pfmet*tag_Ele_pt*(1-cos(event_met_pfphi-tag_Ele_phi))) < 45',
-    8 : 'tag_Ele_trigMVA > 0.92 && sqrt( 2*event_met_pfmet*tag_Ele_pt*(1-cos(event_met_pfphi-tag_Ele_phi))) < 45',
-    9 : 'tag_Ele_trigMVA > 0.92 && sqrt( 2*event_met_pfmet*tag_Ele_pt*(1-cos(event_met_pfphi-tag_Ele_phi))) < 45'
-}
-
+##---FIXME add impact parameter cut for each region
+additionalCuts = { }
+#etabins = biningDef[0]['bins']
+#netabins = len(etabins-1)
+#ptbins  = biningDef[1]['bins']
+#nptbins = len(ptinbs-1)
+#for ieta in range(0,netabins):
+#    for ipt in range(0, nptbins):
+#        i= nptbins*ipt + ieta
+        
 #### or remove any additional cut (default)
 #additionalCuts = None
 
