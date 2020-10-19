@@ -17,22 +17,55 @@ baseOutDir = 'results/Data2017/tnpEleTrig/'
 import etc.inputs.tnpSampleDef as tnpSamples
 tnpTreeDir = 'tnpEleTrig'
 samplesDef={
-    'data'   : tnpSamples.dict2017['data_Run2017B'].clone(),
+    'data_Run2017B'   : tnpSamples.dict2017['data_Run2017B'].clone(),
+    'data_Run2017C'   : tnpSamples.dict2017['data_Run2017C'].clone(),
+    'data_Run2017D'   : tnpSamples.dict2017['data_Run2017D'].clone(),
+    'data_Run2017E'   : tnpSamples.dict2017['data_Run2017E'].clone(),
+    'data_Run2017F'   : tnpSamples.dict2017['data_Run2017F'].clone(),
+    
     'mcNom'  : tnpSamples.dict2017['DY_madgraph'].clone(),
     'mcAlt'  : tnpSamples.dict2017['DY_amcatnlo'].clone(),
-    'tagSel' : tnpSamples.dict2017['DY_madgraph'].clone(),
-    'tagSel2' : tnpSamples.dict2017['DY_madgraph'].clone(),
+    
+
+    ##--tagsel for sys.
+    'data_Run2017B_tagSeldown' : tnpSamples.dict2017['data_Run2017B'].clone(),
+    'data_Run2017C_tagSeldown' : tnpSamples.dict2017['data_Run2017C'].clone(),
+    'data_Run2017D_tagSeldown' : tnpSamples.dict2017['data_Run2017D'].clone(),
+    'data_Run2017E_tagSeldown' : tnpSamples.dict2017['data_Run2017E'].clone(),
+    'data_Run2017F_tagSeldown' : tnpSamples.dict2017['data_Run2017F'].clone(),
+    
+    'data_Run2017B_tagSelup' : tnpSamples.dict2017['data_Run2017B'].clone(),
+    'data_Run2017C_tagSelup' : tnpSamples.dict2017['data_Run2017C'].clone(),
+    'data_Run2017D_tagSelup' : tnpSamples.dict2017['data_Run2017D'].clone(),
+    'data_Run2017E_tagSelup' : tnpSamples.dict2017['data_Run2017E'].clone(),
+    'data_Run2017F_tagSelup' : tnpSamples.dict2017['data_Run2017F'].clone(),
+
+    ##--mllvar
+    'data_Run2017B_mllvar' : tnpSamples.dict2017['data_Run2017B'].clone(),
+    'data_Run2017C_mllvar' : tnpSamples.dict2017['data_Run2017C'].clone(),
+    'data_Run2017D_mllvar' : tnpSamples.dict2017['data_Run2017D'].clone(),
+    'data_Run2017E_mllvar' : tnpSamples.dict2017['data_Run2017E'].clone(),
+    'data_Run2017F_mllvar' : tnpSamples.dict2017['data_Run2017F'].clone(),
+    
 }
 
-if not samplesDef['mcNom' ] is None: samplesDef['mcNom' ].set_mcTruth()
-if not samplesDef['mcAlt' ] is None: samplesDef['mcAlt' ].set_mcTruth()
-if not samplesDef['tagSel'] is None: samplesDef['tagSel'].set_mcTruth()
-if not samplesDef['tagSel'] is None:
-    samplesDef['tagSel'].rename('mcAltSel_DY_madgraph')
-    samplesDef['tagSel'].set_cut('tag_Ele_pt > 35') #
-if not samplesDef['tagSel2'] is None:
-    samplesDef['tagSel2'].rename('mcAltSel2_DY_madgraph')
-    samplesDef['tagSel2'].set_cut('tag_Ele_pt > 45') #
+#if not samplesDef['mcNom' ] is None: samplesDef['mcNom' ].set_mcTruth()
+#if not samplesDef['mcAlt' ] is None: samplesDef['mcAlt' ].set_mcTruth()
+
+
+for s in ['dataB_tagSeldown','dataC_tagSeldown','dataD_tagSeldown','dataE_tagSeldown','dataF_tagSeldown']:
+    continue
+    samplesDef[s].rename(s)
+    samplesDef[s].set_cut('tag_Ele_pt > 35') #
+for s in ['dataB_tagSelup','dataC_tagSelup','dataD_tagSelup','dataE_tagSelup','dataF_tagSelup']:
+    continue
+    samplesDef[s].rename(s)
+    samplesDef[s].set_cut('tag_Ele_pt > 45') #
+
+for s in ['dataB_mllvar','dataC_mllvar','dataD_mllvar','dataE_mllvar','dataF_mllvar']:
+    continue
+    samplesDef[s].rename(s)
+    samplesDef[s].set_cut('pair_mass > 70. && pair_mass <110.') #
 
 #############################################################
 ########## bining definition  [can be nD bining]
@@ -49,7 +82,7 @@ biningDef = [
 #############################################################
 ### cut
 cutBase   = '(\
-(tag_Ele_pt > 40) && (abs(tag_sc_eta) < 2.17) && (passingCutBasedMedium94X   == 1) && (passingMVA94Xwp90iso == 1 ) &&\
+(tag_Ele_pt > 40) && (abs(tag_sc_eta) < 2.5) && (passingCutBasedMedium94X   == 1) && (passingMVA94Xwp90iso == 1 ) &&\
 (   ((el_sc_abseta <= 1.479) && (el_dxy < 0.05) && (el_dz <0.1)) || (  (el_sc_abseta > 1.479) && (el_dxy < 0.1) && (el_dz < 0.2) && (el_sieie < 0.03) && (el_1overEminus1overP < 0.014) ))\
 )'
 
@@ -71,6 +104,7 @@ additionalCuts = { }
 #############################################################
 ########## fitting params to tune fit by hand if necessary
 #############################################################
+'''
 tnpParNomFit = [
     "meanP[-0.0,-5.0,5.0]","sigmaP[0.9,0.5,5.0]",
     "meanF[-0.0,-5.0,5.0]","sigmaF[0.9,0.5,5.0]",
@@ -92,3 +126,4 @@ tnpParAltBkgFit = [
     "alphaF[0.,-5.,5.]",
     ]
         
+'''
