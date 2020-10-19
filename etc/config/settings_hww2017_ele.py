@@ -7,7 +7,7 @@ flags = {
     'passHLT32_HWWID':'passHltEle32DoubleEGWPTightGsf'
     }##FIXME :: add conveto
 
-baseOutDir = 'results/Data2017/tnpEleID/'
+baseOutDir = 'results/Data2017/tnpEleTrig/'
 
 #############################################################
 ########## samples definition  - preparing the samples
@@ -51,7 +51,7 @@ biningDef = [
 cutBase   = '(\
 (tag_Ele_pt > 40) && (abs(tag_sc_eta) < 2.17) && (passingCutBasedMedium94X   == 1) && (passingMVA94Xwp90iso == 1 ) &&\
 (   ((el_sc_abseta <= 1.479) && (el_dxy < 0.05) && (el_dz <0.1)) || (  (el_sc_abseta > 1.479) && (el_dxy < 0.1) && (el_dz < 0.2) && (el_sieie < 0.03) && (el_1overEminus1overP < 0.014) ))\
-)',
+)'
 
 
 # can add addtionnal cuts for some bins (first check bin number using tnpEGM --checkBins)
