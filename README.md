@@ -1,4 +1,22 @@
+
+
+
+
 # egm_tnp_analysis
+##--instruction for HWW ID's Single Eletron Trig Efficiency
+
+For 2018
+>RunHWW2018.sh
+
+For 2017
+>RunHWW2017.sh
+
+For 2016
+>RunHWW2016.sh
+
+
+
+
 
 ## General note on installation
 

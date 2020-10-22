@@ -1,48 +1,72 @@
 from libPython.tnpClassUtils import tnpSample
 
 ### qll stat
-#eosDir1 = 'eos/cms/store/group/phys_egamma/tnp/80X/PhoEleIDs/v1/'
-#eosDir2 = 'eos/cms/store/group/phys_egamma/tnp/80X/PhoEleIDs/v2/'
-#eosDirREC = 'eos/cms/store/group/phys_egamma/tnp/80X/RecoSF/RECOSFs_2016/'
-#eosWinter17 = 'eos/cms/store/group/phys_egamma/tnp/80X/PhoEleIDs/Moriond17_v1/'
-eosMoriond18 = '/eos/cms/store/group/phys_egamma/soffi/TnP/ntuples_01292018/Moriond18_V1/'
-#eos2018Data_V1 = '/eos/cms/store/group/phys_egamma/soffi/TnP/ntuples_05122018/2018Data_V1/'
-eos2018Data_V3 = '/eos/cms/store/group/phys_egamma/soffi/TnP/ntuples_06152018/2018Data_1/'
-Moriond18_94X = {
+eos2016 = '/eos/cms/store/group/phys_egamma/tnpTuples/tomc/2020-06-09/2016/merged/'
+#DY_LO.root  DY_NLO.root  Run2016B.root  Run2016C.root  Run2016D.root  Run2016E.root  Run2016F.root  Run2016G.root  Run2016H.root
+dict2016 = {
     ### MiniAOD TnP for IDs scale factors
     'DY_madgraph'          : tnpSample('DY_madgraph',
-                                       eosMoriond18 + 'mc/TnPTree_DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8_all.root',
+                                       eos2016 + 'DY_LO.root',
                                        isMC = True, nEvts =  -1 ),
-    'DY_madgraph_Moriond18' : tnpSample('DY_madgraph_Moriond18', 
-                                       eosMoriond18 + 'mc/TnPTree_DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8_all.root',
-                                       isMC = True, nEvts =  -1 ),
-    'DY_amcatnlo_Moriond18' : tnpSample('DY_amcatnlo_Moriond18', 
-                                       eosMoriond18 + 'mc/TnPTree_DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8_all.root',
+    'DY_amcatnlo' : tnpSample('DY_amcatnlo', 
+                                       eos2016 + 'DY_NLO.root',
                                        isMC = True, nEvts =  -1 ),
 
-    'data_Run2017B' : tnpSample('data_Run2017B' , eosMoriond18 + 'data/TnPTree_17Nov2017_RunB.root' , lumi = 4.891 ),
-    'data_Run2017C' : tnpSample('data_Run2017C' , eosMoriond18 + 'data/TnPTree_17Nov2017_RunC.root' , lumi = 9.9 ),
-    'data_Run2017D' : tnpSample('data_Run2017D' , eosMoriond18 + 'data/TnPTree_17Nov2017_RunD.root' , lumi = 4.36 ),
-    'data_Run2017E' : tnpSample('data_Run2017E' , eosMoriond18 + 'data/TnPTree_17Nov2017_RunE.root' , lumi = 9.53 ),
-    'data_Run2017F' : tnpSample('data_Run2017F' , eosMoriond18 + 'data/TnPTree_17Nov2017_RunF.root' , lumi = 13.96 ),
+    'data_Run2016B' : tnpSample('data_Run2016B' , eos2016 + 'Run2016B.root' , lumi = 1 ),
+    'data_Run2016C' : tnpSample('data_Run2016C' , eos2016 + 'Run2016C.root' , lumi = 1 ),
+    'data_Run2016D' : tnpSample('data_Run2016D' , eos2016 + 'Run2016D.root' , lumi = 1 ),
+    'data_Run2016E' : tnpSample('data_Run2016E' , eos2016 + 'Run2016E.root' , lumi = 1 ),
+    'data_Run2016F' : tnpSample('data_Run2016F' , eos2016 + 'Run2016F.root' , lumi = 1 ),
+    'data_Run2016G' : tnpSample('data_Run2016G' , eos2016 + 'Run2016G.root' , lumi = 1 ),
+    'data_Run2016H' : tnpSample('data_Run2016H' , eos2016 + 'Run2016H.root' , lumi = 1 ),
 
     }
 
-Data2018_10_1_X = {
 
-#    'DY_madgraph'          : tnpSample('DY_madgraph',
-#                                       eosMoriond18 + 'mc/TnPTree_DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8_all.root',
-#                                       isMC = True, nEvts =  -1 ),
-    'DY_madgraph_2018_30p' : tnpSample('DY_madgraph_2018_30p',
-                                       eos2018Data_V3 + 'mc/TnP_DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8_30pStat_all.root',
+
+eos2017 = '/eos/cms/store/group/phys_egamma/tnpTuples/tomc/2020-06-09/2017/merged/'
+#DY1_LO.root  DY1_LO_ext.root  DY_LO.root  DY_LO_ext.root  DY_NLO.root  DY_NLO_ext.root
+dict2017 = {
+    ### MiniAOD TnP for IDs scale factors
+    'DY_madgraph'          : tnpSample('DY_madgraph',
+                                       eos2017 + 'DY_LO.root',
                                        isMC = True, nEvts =  -1 ),
-#    'DY_amcatnlo_2018' : tnpSample('DY_amcatnlo_Moriond18',
-#                                       eosMoriond18 + 'mc/TnPTree_DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8_all.root',
-#                                       isMC = True, nEvts =  -1 ),
+    'DY_madgraph_ext' : tnpSample('DY_madgraph_ext', 
+                                       eos2017 + 'DY_LO_ext.root',
+                                       isMC = True, nEvts =  -1 ),
+    'DY_amcatnlo' : tnpSample('DY_amcatnlo', 
+                                       eos2017 + 'DY_NLO.root',
+                                       isMC = True, nEvts =  -1 ),
 
-    'data_2018_RunA_v123' : tnpSample('data_2018_RunA_v123' , eos2018Data_V3 + 'data/TnP_Prompt2018_RunA_v123_selectedRuns.root' , lumi = 0 ),#FIXME so far all the integrated value of the lumi is assigned to runb, still need to compute individual run lumi
-    'data_2018_RunB_v1' : tnpSample('data_2018_RunB' , eos2018Data_V3 + 'data/TnP_Prompt2018_RunB_v1_all.root' , lumi = 16.59 ),
+    'data_Run2017B' : tnpSample('data_Run2017B' , eos2017 + 'Run2017B.root' , lumi = 4.891 ),
+    'data_Run2017C' : tnpSample('data_Run2017C' , eos2017 + 'Run2017C.root' , lumi = 9.9 ),
+    'data_Run2017D' : tnpSample('data_Run2017D' , eos2017 + 'Run2017D.root' , lumi = 4.36 ),
+    'data_Run2017E' : tnpSample('data_Run2017E' , eos2017 + 'Run2017E.root' , lumi = 9.53 ),
+    'data_Run2017F' : tnpSample('data_Run2017F' , eos2017 + 'Run2017F.root' , lumi = 13.96 ),
+
+    }
 
 
 
-}
+
+#DY.root  DY_NLO.root  DY_NLO_ext.root  DY_pow.root
+eos2018 = '/eos/cms/store/group/phys_egamma/tnpTuples/tomc/2020-06-09/2018/merged/'
+dict2018 = {
+    ### MiniAOD TnP for IDs scale factors
+    'DY_madgraph'          : tnpSample('DY_madgraph',
+                                       eos2018 + 'DY.root',
+                                       isMC = True, nEvts =  -1 ),
+    'DY_pow' : tnpSample('DY_pow', 
+                                       eos2018 + 'DY_pow.root',
+                                       isMC = True, nEvts =  -1 ),
+    'DY_amcatnlo' : tnpSample('DY_amcatnlo', 
+                                       eos2018 + 'DY_NLO.root',
+                                       isMC = True, nEvts =  -1 ),
+
+    'data_Run2018B' : tnpSample('data_Run2018B' , eos2018 + 'Run2018B.root' , lumi = 1. ),
+    'data_Run2018C' : tnpSample('data_Run2018C' , eos2018 + 'Run2018C.root' , lumi = 1. ),
+    'data_Run2018D' : tnpSample('data_Run2018D' , eos2018 + 'Run2018D.root' , lumi = 1. ),
+    'data_Run2018A' : tnpSample('data_Run2018A' , eos2018 + 'Run2018A.root' , lumi = 1. ),
+
+    }
+

@@ -49,23 +49,35 @@ samplesDef={
     
 }
 
-#if not samplesDef['mcNom' ] is None: samplesDef['mcNom' ].set_mcTruth()
-#if not samplesDef['mcAlt' ] is None: samplesDef['mcAlt' ].set_mcTruth()
+if not samplesDef['mcNom' ] is None: samplesDef['mcNom' ].set_mcTruth()
+if not samplesDef['mcAlt' ] is None: samplesDef['mcAlt' ].set_mcTruth()
 
 
-for s in ['dataB_tagSeldown','dataC_tagSeldown','dataD_tagSeldown','dataE_tagSeldown','dataF_tagSeldown']:
-    continue
+for s in ['data_Run2017B_tagSeldown','data_Run2017C_tagSeldown','data_Run2017D_tagSeldown','data_Run2017E_tagSeldown','data_Run2017F_tagSeldown']:
+    #continue
     samplesDef[s].rename(s)
-    samplesDef[s].set_cut('tag_Ele_pt > 35') #
-for s in ['dataB_tagSelup','dataC_tagSelup','dataD_tagSelup','dataE_tagSelup','dataF_tagSelup']:
-    continue
+    cutBase   = '(\
+(tag_Ele_pt > 35) && (abs(tag_sc_eta) < 2.5) && (passingCutBasedMedium94X   == 1) && (passingMVA94Xwp90iso == 1 ) && (el_relIso_fall17 < 0.06) &&\
+(   ((el_sc_abseta <= 1.479) && (el_dxy < 0.05) && (el_dz <0.1)) || (  (el_sc_abseta > 1.479) && (el_dxy < 0.1) && (el_dz < 0.2) && (el_sieie < 0.03) && (el_1overEminus1overP < 0.014) ))\
+)'
+    samplesDef[s].set_cut(cutBase)
+for s in ['data_Run2017B_tagSelup','data_Run2017C_tagSelup','data_Run2017D_tagSelup','data_Run2017E_tagSelup','data_Run2017F_tagSelup']:
+    #continue
     samplesDef[s].rename(s)
-    samplesDef[s].set_cut('tag_Ele_pt > 45') #
+    cutBase   = '(\
+(tag_Ele_pt > 45) && (abs(tag_sc_eta) < 2.5) && (passingCutBasedMedium94X   == 1) && (passingMVA94Xwp90iso == 1 ) && (el_relIso_fall17 < 0.06) &&\
+(   ((el_sc_abseta <= 1.479) && (el_dxy < 0.05) && (el_dz <0.1)) || (  (el_sc_abseta > 1.479) && (el_dxy < 0.1) && (el_dz < 0.2) && (el_sieie < 0.03) && (el_1overEminus1overP < 0.014) ))\
+)'
+    samplesDef[s].set_cut(cutBase) #
 
-for s in ['dataB_mllvar','dataC_mllvar','dataD_mllvar','dataE_mllvar','dataF_mllvar']:
-    continue
+for s in ['data_Run2017B_mllvar','data_Run2017C_mllvar','data_Run2017D_mllvar','data_Run2017E_mllvar','data_Run2017F_mllvar']:
+    #continue
+    cutBase   = '(\
+(tag_Ele_pt > 40) && (abs(tag_sc_eta) < 2.5) && (passingCutBasedMedium94X   == 1) && (passingMVA94Xwp90iso == 1 ) && (el_relIso_fall17 < 0.06) &&\
+(   ((el_sc_abseta <= 1.479) && (el_dxy < 0.05) && (el_dz <0.1)) || (  (el_sc_abseta > 1.479) && (el_dxy < 0.1) && (el_dz < 0.2) && (el_sieie < 0.03) && (el_1overEminus1overP < 0.014) )) && (pair_mass > 70. && pair_mass <110.)\
+)'
     samplesDef[s].rename(s)
-    samplesDef[s].set_cut('pair_mass > 70. && pair_mass <110.') #
+    samplesDef[s].set_cut(cutBase)
 
 #############################################################
 ########## bining definition  [can be nD bining]
@@ -82,7 +94,7 @@ biningDef = [
 #############################################################
 ### cut
 cutBase   = '(\
-(tag_Ele_pt > 40) && (abs(tag_sc_eta) < 2.5) && (passingCutBasedMedium94X   == 1) && (passingMVA94Xwp90iso == 1 ) &&\
+(tag_Ele_pt > 40) && (abs(tag_sc_eta) < 2.5) && (passingCutBasedMedium94X   == 1) && (passingMVA94Xwp90iso == 1 ) && (el_relIso_fall17 < 0.06) &&\
 (   ((el_sc_abseta <= 1.479) && (el_dxy < 0.05) && (el_dz <0.1)) || (  (el_sc_abseta > 1.479) && (el_dxy < 0.1) && (el_dz < 0.2) && (el_sieie < 0.03) && (el_1overEminus1overP < 0.014) ))\
 )'
 
