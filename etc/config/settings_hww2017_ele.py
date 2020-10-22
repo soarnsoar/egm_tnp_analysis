@@ -4,8 +4,8 @@
 # flag to be Tested
 
 flags = {
-    'passHLT32_HWWID':'passHltEle32DoubleEGWPTightGsf'
-    }##FIXME :: add conveto
+    'passHLT32_HWWID':'passHltEle32DoubleEGWPTightGsf&&passEGL1SingleEGOr'
+    }
 
 baseOutDir = 'results/Data2017/tnpEleTrig/'
 
