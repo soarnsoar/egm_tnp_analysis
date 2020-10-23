@@ -60,14 +60,14 @@ for s in ['data_Run2018A_tagSeldown','data_Run2018B_tagSeldown','data_Run2018C_t
     samplesDef[s].rename(s)
     cutBase   = '(\
     (tag_Ele_pt > 35) && (abs(tag_sc_eta) < 2.5) && (passingCutBasedMedium94X   == 1) && (passingMVA94Xwp90iso == 1 ) && (el_relIso_fall17 < 0.06)&&\
-    (   ((el_sc_abseta <= 1.479) && (el_dxy < 0.05) && (el_dz <0.1)) || (  (el_sc_abseta > 1.479) && (el_dxy < 0.1) && (el_dz < 0.2) && (el_sieie < 0.03) && (el_1overEminus1overP < 0.014) ))\
+    (   ((el_sc_abseta <= 1.479) && (fabs(el_dxy) < 0.05) && (fabs(el_dz) <0.1)) || (  (el_sc_abseta > 1.479) && (fabs(el_dxy) < 0.1) && (fabs(el_dz) < 0.2) && (el_sieie < 0.03) && (el_1overEminus1overP < 0.014) ))\
     )'
     samplesDef[s].set_cut(cutBase)
 for s in ['data_Run2018A_tagSelup','data_Run2018B_tagSelup','data_Run2018C_tagSelup','data_Run2018D_tagSelup']:
     #continue
     cutBase   = '(\
     (tag_Ele_pt > 45) && (abs(tag_sc_eta) < 2.5) && (passingCutBasedMedium94X   == 1) && (passingMVA94Xwp90iso == 1 ) && (el_relIso_fall17 < 0.06)&&\
-    (   ((el_sc_abseta <= 1.479) && (el_dxy < 0.05) && (el_dz <0.1)) || (  (el_sc_abseta > 1.479) && (el_dxy < 0.1) && (el_dz < 0.2) && (el_sieie < 0.03) && (el_1overEminus1overP < 0.014) ))\
+    (   ((el_sc_abseta <= 1.479) && (fabs(el_dxy) < 0.05) && (fabs(el_dz) <0.1)) || (  (el_sc_abseta > 1.479) && (fabs(el_dxy) < 0.1) && (fabs(el_dz) < 0.2) && (el_sieie < 0.03) && (el_1overEminus1overP < 0.014) ))\
     )'
     samplesDef[s].rename(s)
     samplesDef[s].set_cut(cutBase)
@@ -76,7 +76,7 @@ for s in ['data_Run2018A_mllvar','data_Run2018B_mllvar','data_Run2018C_mllvar','
     #continue
     cutBase   = '(\
     (tag_Ele_pt > 40) && (abs(tag_sc_eta) < 2.5) && (passingCutBasedMedium94X   == 1) && (passingMVA94Xwp90iso == 1 ) && (el_relIso_fall17 < 0.06)&&\
-    (   ((el_sc_abseta <= 1.479) && (el_dxy < 0.05) && (el_dz <0.1)) || (  (el_sc_abseta > 1.479) && (el_dxy < 0.1) && (el_dz < 0.2) && (el_sieie < 0.03) && (el_1overEminus1overP < 0.014) )) && (pair_mass > 70. && pair_mass <110.)\
+    (   ((el_sc_abseta <= 1.479) && (fabs(el_dxy) < 0.05) && (fabs(el_dz) <0.1)) || (  (el_sc_abseta > 1.479) && (fabs(el_dxy) < 0.1) && (fabs(el_dz) < 0.2) && (el_sieie < 0.03) && (el_1overEminus1overP < 0.014) )) && (pair_mass > 70. && pair_mass <110.)\
     )'
     samplesDef[s].rename(s)
     samplesDef[s].set_cut(cutBase)
@@ -95,7 +95,7 @@ biningDef = [
 ### cut
 cutBase   = '(\
 (tag_Ele_pt > 40) && (abs(tag_sc_eta) < 2.5) && (passingCutBasedMedium94X   == 1) && (passingMVA94Xwp90iso == 1 ) && (el_relIso_fall17 < 0.06)&&\
-(   ((el_sc_abseta <= 1.479) && (el_dxy < 0.05) && (el_dz <0.1)) || (  (el_sc_abseta > 1.479) && (el_dxy < 0.1) && (el_dz < 0.2) && (el_sieie < 0.03) && (el_1overEminus1overP < 0.014) ))\
+(   ((el_sc_abseta <= 1.479) && (fabs(el_dxy) < 0.05) && (fabs(el_dz) <0.1)) || (  (el_sc_abseta > 1.479) && (fabs(el_dxy) < 0.1) && (fabs(el_dz) < 0.2) && (el_sieie < 0.03) && (el_1overEminus1overP < 0.014) ))\
 )'
 
 
