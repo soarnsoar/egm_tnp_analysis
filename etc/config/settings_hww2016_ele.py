@@ -75,7 +75,7 @@ for s in ['data_Run2016B_tagSeldown','data_Run2016C_tagSeldown','data_Run2016D_t
     #continue
     cutBase   = '(\
     (tag_Ele_pt > 30) && (abs(tag_sc_eta) < 2.5) &&(el_lost_hits < 1) && (passingHLTsafe   == 1) && (passingMVA80Xwp90 == 1 ) &&\
-    (   ((el_sc_abseta <= 1.479) && (el_dxy < 0.05) && (el_dz <0.1) && (el_relIso_fall17 <0.05880 )) || (  (el_sc_abseta > 1.479) && (el_dxy < 0.1) && (el_dz < 0.2) && ( el_relIso_fall17 < 0.0571) ))\
+    (   ((el_sc_abseta <= 1.479) && (fabs(el_dxy) < 0.05) && (fabs(el_dz) <0.1) && (el_relIso_fall17 <0.05880 )) || (  (el_sc_abseta > 1.479) && (fabs(el_dxy) < 0.1) && (fabs(el_dz) < 0.2) && ( el_relIso_fall17 < 0.0571) ))\
     )'
 
     samplesDef[s].rename(s)
@@ -84,7 +84,7 @@ for s in ['data_Run2016B_tagSelup','data_Run2016C_tagSelup','data_Run2016D_tagSe
     #continue
     cutBase   = '(\
     (tag_Ele_pt > 40) && (abs(tag_sc_eta) < 2.5) &&(el_lost_hits < 1) && (passingHLTsafe   == 1) && (passingMVA80Xwp90 == 1 ) &&\
-    (   ((el_sc_abseta <= 1.479) && (el_dxy < 0.05) && (el_dz <0.1) && (el_relIso_fall17 <0.05880 )) || (  (el_sc_abseta > 1.479) && (el_dxy < 0.1) && (el_dz < 0.2) && ( el_relIso_fall17 < 0.0571) ))\
+    (   ((el_sc_abseta <= 1.479) && (fabs(el_dxy) < 0.05) && (fabs(el_dz) <0.1) && (el_relIso_fall17 <0.05880 )) || (  (el_sc_abseta > 1.479) && (fabs(el_dxy) < 0.1) && (fabs(el_dz) < 0.2) && ( el_relIso_fall17 < 0.0571) ))\
     )'
 
     samplesDef[s].rename(s)
@@ -94,7 +94,7 @@ for s in ['data_Run2016B_mllvar','data_Run2016C_mllvar','data_Run2016D_mllvar','
     #continue
     cutBase   = '(\
     (tag_Ele_pt > 35) && (abs(tag_sc_eta) < 2.5) &&(el_lost_hits < 1) && (passingHLTsafe   == 1) && (passingMVA80Xwp90 == 1 ) &&\
-    (   ((el_sc_abseta <= 1.479) && (el_dxy < 0.05) && (el_dz <0.1) && (el_relIso_fall17 <0.05880 )) || (  (el_sc_abseta > 1.479) && (el_dxy < 0.1) && (el_dz < 0.2) && ( el_relIso_fall17 < 0.0571) )) && (pair_mass > 70. && pair_mass <110.)\
+    (   ((el_sc_abseta <= 1.479) && (fabs(el_dxy) < 0.05) && (fabs(el_dz) <0.1) && (el_relIso_fall17 <0.05880 )) || (  (el_sc_abseta > 1.479) && (fabs(el_dxy) < 0.1) && (fabs(el_dz) < 0.2) && ( el_relIso_fall17 < 0.0571) )) && (pair_mass > 70. && pair_mass <110.)\
     )'
 
     samplesDef[s].rename(s)
@@ -114,7 +114,7 @@ biningDef = [
 ### cut
 cutBase   = '(\
 (tag_Ele_pt > 35) && (abs(tag_sc_eta) < 2.5) &&(el_lost_hits < 1) && (passingHLTsafe   == 1) && (passingMVA80Xwp90 == 1 ) &&\
-(   ((el_sc_abseta <= 1.479) && (el_dxy < 0.05) && (el_dz <0.1) && (el_relIso_fall17 <0.05880 )) || (  (el_sc_abseta > 1.479) && (el_dxy < 0.1) && (el_dz < 0.2) && ( el_relIso_fall17 < 0.0571) ))\
+(   ((el_sc_abseta <= 1.479) && (fabs(el_dxy) < 0.05) && (fabs(el_dz) <0.1) && (el_relIso_fall17 <0.05880 )) || (  (el_sc_abseta > 1.479) && (fabs(el_dxy) < 0.1) && (fabs(el_dz) < 0.2) && ( el_relIso_fall17 < 0.0571) ))\
 )'
 
 
